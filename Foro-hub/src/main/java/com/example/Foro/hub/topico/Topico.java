@@ -4,8 +4,14 @@ package com.example.Foro.hub.topico;
 import com.example.Foro.hub.usuario.Usuario;
 import com.example.Foro.hub.curso.Curso;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.LocalDateTime;
 
+
+@Getter
+@Setter
 @Entity
 public class Topico {
 

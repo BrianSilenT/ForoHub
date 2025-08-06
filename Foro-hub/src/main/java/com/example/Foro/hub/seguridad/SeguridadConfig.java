@@ -11,19 +11,26 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class SeguridadConfig {
 
+
+
+    @Bean
+    public AuthenticationManager authManager(AuthenticationConfiguration config) throws Exception {
+        return config.getAuthenticationManager();
+    }
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/aut/login").permitAll()
+                        .requestMatchers(
+                                "/api/aut/login",
+                                "/swagger-ui.html",
+                                "/swagger-ui/**",
+                                "/v3/api-docs/**"
+                        ).permitAll()
                         .anyRequest().authenticated()
                 )
                 .build();
-    }
-
-    @Bean
-    public AuthenticationManager authManager(AuthenticationConfiguration config) throws Exception {
-        return config.getAuthenticationManager();
     }
 }
