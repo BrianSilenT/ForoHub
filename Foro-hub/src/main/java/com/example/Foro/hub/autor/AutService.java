@@ -26,7 +26,7 @@ public class AutService {
 
         authManager.authenticate(authToken);
 
-        Usuario usuario = usuarioRepository.findByUsername(request.getUsername())
+        Usuario usuario = usuarioRepository.findByEmail(request.getUsername())
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
 
         return jwtUtils.generarToken(usuario);
