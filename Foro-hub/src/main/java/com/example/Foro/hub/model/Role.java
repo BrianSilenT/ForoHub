@@ -21,7 +21,9 @@ public class Role implements GrantedAuthority {
         return name.name();
     }
 
-    public Role() {}
+    public Role() {
+
+    }
 
     public Role(RoleName name) {
         this.name = name;
