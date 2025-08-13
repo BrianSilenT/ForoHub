@@ -26,12 +26,11 @@ public class AuthService {
 
     public AuthenticationResponse login(AuthenticationRequest request) {
         Authentication auth = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword())
+                new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword())
         );
 
-        Usuario user = userRepository.findByEmail(request.getUsername())
+        Usuario user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-
         String token = jwtService.generarToken(user);
         return new AuthenticationResponse(token);
     }

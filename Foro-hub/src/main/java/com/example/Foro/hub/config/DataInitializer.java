@@ -16,23 +16,23 @@ import java.util.Set;
 public class DataInitializer {
 
     @Bean
-    CommandLineRunner initRoles(RoleRepository roleRepository) {
+    CommandLineRunner initData(RoleRepository roleRepository, UsuarioRepository usuarioRepository, PasswordEncoder passwordEncoder) {
         return args -> {
+            // Crear roles
             for (RoleName roleName : RoleName.values()) {
                 if (!roleRepository.existsByName(roleName)) {
                     roleRepository.save(new Role(roleName));
                     System.out.println("Rol creado: " + roleName);
                 }
             }
-        };
-    }
 
-    @Bean
-    CommandLineRunner initUser(RoleRepository roleRepository, UsuarioRepository usuarioRepository, PasswordEncoder passwordEncoder) {
-        return args -> {
+            // Crear usuario
+            // Crear usuario
             if (!usuarioRepository.existsByEmail("user@forohub.com")) {
-                Role userRole = roleRepository.findByName(RoleName.ROLE_USER).orElseThrow();
+                Role userRole = roleRepository.findByName(RoleName.ROLE_USER)
+                        .orElseThrow(() -> new IllegalStateException("ROLE_USER no encontrado"));
                 Usuario user = new Usuario();
+                user.setUsername("usuario123"); // ← Esta línea es clave
                 user.setNombre("Usuario");
                 user.setEmail("user@forohub.com");
                 user.setPassword(passwordEncoder.encode("user123"));

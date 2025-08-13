@@ -59,6 +59,9 @@ public class Usuario implements UserDetails {
         return true;
     }
 
+    @Column(nullable = false, unique = true)
+    private String username;
+
     @Override
     public boolean isEnabled() {
         return true;

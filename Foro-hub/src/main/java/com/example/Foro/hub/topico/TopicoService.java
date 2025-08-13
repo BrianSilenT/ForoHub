@@ -15,6 +15,10 @@ public class TopicoService {
     private TopicoRepository topicoRepository;
 
     public Topico crearTopico(Topico topico) {
+        boolean existe = topicoRepository.existsByTituloAndMensaje(topico.getTitulo(), topico.getMensaje());
+        if (existe) {
+            throw new RuntimeException("Ya existe un tópico con el mismo título y mensaje");
+        }
         return topicoRepository.save(topico);
     }
 
