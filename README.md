@@ -54,3 +54,7 @@ src/
 │   └── resources/
 │       ├── db/migration/
 │       └── application.properties
+
+
+✅ Repositorio público: [https://github.com/BrianSilenT/ForoHub](https://github.com/BrianSilenT/ForoHub)
+📌 Accesible directamente desde cualquier navegador.
